@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using randka.data;
 
 namespace randka
 {
@@ -23,6 +25,8 @@ namespace randka
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // dodajemy usluge dla bazy danych
+            services.AddDbContext<datacontext>(x =>x.UseSqlite("Connectionstring"));
             services.AddRazorPages();
             services.AddMvc(option => option.EnableEndpointRouting = false);
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace randka.controller
 {
-
+    // jak dostac sie do kontrolera a reszta znaczy o dodawaniu itp
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
