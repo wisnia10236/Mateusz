@@ -12,5 +12,7 @@ namespace randka.data
         public datacontext(DbContextOptions<datacontext> options) : base(options) { }
         // tworzy tabele z kolumnami value
         public DbSet<Value> values { get; set; }
+        // https://forums.asp.net/t/2133983.aspx?Build+failed+when+trying+to+addmigration+and+update+database
+        //https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx
     }
 }

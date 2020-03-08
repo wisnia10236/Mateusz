@@ -26,7 +26,7 @@ namespace randka
         public void ConfigureServices(IServiceCollection services)
         {
             // dodajemy usluge dla bazy danych
-            services.AddDbContext<datacontext>(x =>x.UseSqlite("Connectionstring"));
+            services.AddDbContext<datacontext>(x =>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")); // < z kofiguracji appsettings pobierze baze danych odpowiadajaca nazwy
             services.AddRazorPages();
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
