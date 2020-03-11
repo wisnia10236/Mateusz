@@ -9,6 +9,6 @@ namespace randka.models
     {
         // model co tam bedzie
         public int id { get; set; }
-        public int name { get; set; }
+        public string name { get; set; }
     }
 }

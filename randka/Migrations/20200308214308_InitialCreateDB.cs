@@ -12,7 +12,7 @@ namespace randka.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<int>(nullable: false)
+                    name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

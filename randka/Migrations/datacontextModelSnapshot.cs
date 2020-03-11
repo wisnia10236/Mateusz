@@ -21,8 +21,8 @@ namespace randka.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("name")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("name")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("id");
 
