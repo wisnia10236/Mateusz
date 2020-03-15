@@ -29,6 +29,7 @@ namespace randka
             services.AddDbContext<datacontext>(x =>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))); // < z kofiguracji appsettings pobierze baze danych odpowiadajaca nazwy
             services.AddRazorPages();
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddCors();     // dodanie angulara do api aby pozwalal przesylac dane
 
         }
 
@@ -46,8 +47,8 @@ namespace randka
                 app.UseHsts();
             }
 
-            
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()); //uzywanie wszystkich metod itp z angulara
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
