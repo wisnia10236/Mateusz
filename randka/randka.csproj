@@ -14,6 +14,8 @@
   <ItemGroup>
     <Compile Include="Migrations\20200308214308_InitialCreateDB.cs" />
     <Compile Include="Migrations\20200308214308_InitialCreateDB.Designer.cs" />
+    <Compile Include="Migrations\20200316211821_AddedUser.cs" />
+    <Compile Include="Migrations\20200316211821_AddedUser.Designer.cs" />
     <Compile Include="Migrations\datacontextModelSnapshot.cs" />
   </ItemGroup>
 
