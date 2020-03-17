@@ -1,4 +1,5 @@
-﻿using randka.data;
+﻿using Microsoft.EntityFrameworkCore;
+using randka.data;
 using randka.models;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,20 @@ namespace randka.Repository
             _context = context;
         }
 
-        public Task<User> Login(string username, string password)
+        public async Task<User> Login(string username, string password)
         {
-            throw new NotImplementedException();
+            var user = await _context.users.FirstOrDefaultAsync(x => x.Username == username); // pobieramy uzytk z bd
+
+            if (user == null) // sprawdzamy czy jest
+                return null;
+
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) // weryfikujemy haslo ze strony z db
+                return null;
+
+            return user;
         }
+
+       
 
         public async Task<User> Register(User user, string password)
         {
@@ -36,9 +47,12 @@ namespace randka.Repository
 
             return user;
         }
-        public Task<bool> UserExitst(string username)
+        public async Task<bool> UserExitst(string username)
         {
-            throw new NotImplementedException();
+            if (await _context.users.AnyAsync(x => x.Username == username))
+                return true;
+
+            return false;
         }
 
         #endregion
@@ -54,6 +68,24 @@ namespace randka.Repository
             }
             
         }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))  // dodajemy nasz klucz zahashowany
+            {
+                
+                var computedhash= hmac.ComputeHash(Encoding.UTF8.GetBytes(password)); // kodujemy haslo tak jak powinno byc zahashowane w db
+
+                for (int i = 0; i < computedhash.Length; i++) // sprawdzamy czy pasuje z haslem db
+                {
+                    if (computedhash[i] != passwordHash[i])
+                        return false;
+                }
+                return true;
+            }
+        }
+
+
         #endregion
 
     }
