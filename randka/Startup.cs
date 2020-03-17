@@ -30,6 +30,7 @@ namespace randka
             services.AddRazorPages();
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddCors();     // dodanie angulara do api aby pozwalal przesylac dane
+            services.AddScoped<IAuthRepository,IAuthRepository>(); // zarejestrowanie instancje dla interfejsu i repozytorium 
 
         }
 
