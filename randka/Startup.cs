@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using randka.data;
+using randka.Repository;
 
 namespace randka
 {
@@ -30,7 +31,7 @@ namespace randka
             services.AddRazorPages();
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddCors();     // dodanie angulara do api aby pozwalal przesylac dane
-            services.AddScoped<IAuthRepository,IAuthRepository>(); // zarejestrowanie instancje dla interfejsu i repozytorium 
+            services.AddScoped<IAuthRepository,AuthRepository>(); // zarejestrowanie instancje dla interfejsu i repozytorium 
 
         }
 

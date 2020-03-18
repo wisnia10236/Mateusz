@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using randka.data;
+using randka.Dtos;
 using randka.models;
 using System;
 using System.Collections.Generic;
@@ -20,18 +21,19 @@ namespace randka.controller
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(string username, string password)
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto) // przekazujemy dto z userforregister dla rejestracji
         {
-            username = username.ToLower(); // zmiaana na male litery aby sie nie mieszalo
+            userForRegisterDto.Username = userForRegisterDto.Username.ToLower(); // zmiaana na male litery aby sie nie mieszalo
 
-            if (await _repository.UserExitst(username)) // sprawdzamy przy pomocy repo istnieje taka nazwa uzytk 
+            if (await _repository.UserExitst(userForRegisterDto.Username)) // sprawdzamy przy pomocy repo istnieje taka nazwa uzytk 
                 return BadRequest("Uzytkownik o takiej nazwie istnieje"); // jesli zle to wysyla blad ...
 
             var usertocreate = new User // tworzymy obiekt dla klasy w modelu
             {
-                Username = username
+                Username = userForRegisterDto.Username
             };
-            var createduser = await _repository.Register(usertocreate,password); // przekazujemy dla rejestracji obiekt z klasy modelu i password aby zahashowal itp 
+            var createduser = await _repository.Register(usertocreate, userForRegisterDto.Password); // przekazujemy dla rejestracji obiekt z klasy modelu i password aby zahashowal itp 
+            
             return StatusCode(201);
         }
         
