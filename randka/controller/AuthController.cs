@@ -23,6 +23,7 @@ namespace randka.controller
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto) // przekazujemy dto z userforregister dla rejestracji
         {
+
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower(); // zmiaana na male litery aby sie nie mieszalo
 
             if (await _repository.UserExitst(userForRegisterDto.Username)) // sprawdzamy przy pomocy repo istnieje taka nazwa uzytk 
