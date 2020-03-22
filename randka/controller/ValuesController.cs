@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using randka.models;
 namespace randka.controller
 {
     // jak dostac sie do kontrolera a reszta znaczy o dodawaniu itp
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -38,6 +40,7 @@ namespace randka.controller
             return Ok(values);
         }
 
+        [AllowAnonymous] //kazdy moze to zobaczy
         // GET: api/Values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)

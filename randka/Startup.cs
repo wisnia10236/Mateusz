@@ -11,6 +11,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using randka.data;
 using randka.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace randka
 {
@@ -32,6 +35,17 @@ namespace randka
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddCors();     // dodanie angulara do api aby pozwalal przesylac dane
             services.AddScoped<IAuthRepository,AuthRepository>(); // zarejestrowanie instancje dla interfejsu i repozytorium 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // dodanie tokenow i jak go kodujemy
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                    };
+                });
 
         }
 
@@ -51,6 +65,7 @@ namespace randka
 
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()); //uzywanie wszystkich metod itp z angulara
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
