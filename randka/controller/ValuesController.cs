@@ -33,6 +33,7 @@ namespace randka.controller
             return Ok(values);
         }
         */
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
