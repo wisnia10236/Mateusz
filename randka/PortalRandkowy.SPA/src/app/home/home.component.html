@@ -1,0 +1,19 @@
+<!-- kontener na strone glowna -->
+<div class="container mt-5">
+  <div *ngIf="!registerMode" style="text-align: center"> <!-- div informacyjny i napisu-->
+    <h1>Znajdz swoją drugą połowkę</h1>
+    <p class="lead mt-4">Wejdź aby zobaczyć swoje dopasowania... Wszystko co musisz zrobić to zarejestrować się! </p>
+    <div class="text-center mt-5">
+      <button class="btn btn-primary btn-lg mr-3" (click)="registerToggle()">Rejestracja</button>
+      <button class="btn btn-info btn-lg">wiecej...</button>
+    </div>
+  </div>
+  <!-- wyswietlenie dla formularza rejestracji-->
+  <div *ngIf="registerMode" class="container">
+    <div class="row justify-content-lg-center">
+      <div class="col-4 "> <!-- 22:26 skonczylem-->
+        <app-register></app-register>
+      </div>
+    </div>
+  </div>
+</div>
