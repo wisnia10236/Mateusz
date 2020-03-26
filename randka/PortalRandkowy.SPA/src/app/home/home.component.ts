@@ -18,7 +18,11 @@ export class HomeComponent implements OnInit {
   }
 
   registerToggle() {
-    this.registerMode = !this.registerMode;
+    this.registerMode = true;
+  }
+
+  cancelRegisterMode(registerMode : boolean) {
+    this.registerMode = registerMode;
   }
 
   getValues() { // pobieranie wartosci z api dla angulara
@@ -27,6 +31,7 @@ export class HomeComponent implements OnInit {
     }, error => { // wywolujemy error
       console.log(error);
     });
-
   }
+
+
 }
