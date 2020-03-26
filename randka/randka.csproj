@@ -39,6 +39,8 @@
     <Folder Include="PortalRandkowy.SPA\src\app\_services\" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties portalrandkowy_1spa_4tsconfig_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 
 
 </Project>

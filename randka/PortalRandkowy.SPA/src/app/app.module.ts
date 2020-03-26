@@ -9,6 +9,7 @@ import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { AlertifyService } from './_services/alertify.service';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule, // dodanie importu dla angulara aby widzial nasze api
     FormsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService,AlertifyService], //dodawanie serwisow
   bootstrap: [AppComponent]
 })
 export class AppModule { }
