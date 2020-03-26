@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../_services/auth.service';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-register',
@@ -7,18 +9,22 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  @Input() valuesFromHome: any;
   @Output() cancelRegister = new EventEmitter();  //emituje zdarzenie przycisku cancel
 
   model: any = {};
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   register() {
-    console.log(this.model);
+    this.authService.register(this.model).subscribe(() => {  //metoda rejestracji, wysylajace dane sa obserwowane wiec trzeba je zasubskrybowac no i pozniej to jakies wyswietlenie czy napewno sie udalo
+      console.log('rejestracja udana');
+    }, error => {
+        console.log(error);
+    })
+    
   }
 
   cancel() {

@@ -9,12 +9,12 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit {
 
   registerMode = false;
-  values: any;
+
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getValues();
+    
   }
 
   registerToggle() {
@@ -25,13 +25,6 @@ export class HomeComponent implements OnInit {
     this.registerMode = registerMode;
   }
 
-  getValues() { // pobieranie wartosci z api dla angulara
-    this.http.get('https://localhost:44340/api/Values').subscribe(Response => {
-      this.values = Response;   // pobiera z localhost , odpowiedz(subscribe) zapisujemy do wartosci values
-    }, error => { // wywolujemy error
-      console.log(error);
-    });
-  }
 
 
 }

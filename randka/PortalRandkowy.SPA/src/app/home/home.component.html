@@ -12,7 +12,7 @@
   <div *ngIf="registerMode" class="container">
     <div class="row justify-content-lg-center">
       <div class="col-4 "> 
-        <app-register [valuesFromHome]="values" (cancelRegister)="cancelRegisterMode($event)"></app-register> <!-- valuesfromhome to jest jakies dane ktore wyplywaja z register  i dodajemy wlasciwosc wyjsciowa ($ to event)-->
+        <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register> <!-- valuesfromhome to jest jakies dane ktore wyplywaja z register  i dodajemy wlasciwosc wyjsciowa ($ to event)-->
       </div>
     </div>
   </div>

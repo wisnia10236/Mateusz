@@ -20,5 +20,12 @@ export class AuthService {
         }
       })); // gdy dostajemy odpowiedz z jakas odpowiedzia (response) to zapisujemy ja i jesli jest to zapisujemy token
   }
+
+  register(model: any) {
+    return this.http.post(this.baseUrl + 'register', model); // wysylanie dla api aby zarejestrowal go
+  }
+
+
+
 }
 // services nie jest automatycznie dodawany do app.module i trzeba go dopisac
