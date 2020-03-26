@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { JwtHelperService } from "@auth0/angular-jwt";
 import { map } from 'rxjs/operators';
 
 @Injectable({ //sluzy do wstrzykiwania do servisu naszego dekoratora
@@ -8,6 +9,7 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   baseUrl = 'https://localhost:44340/api/auth/'; // adres bazowy dla loginu i hasla
+  jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient) { } // wstrzykujemy klienta aby miec do niego dostep
 
@@ -25,7 +27,10 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'register', model); // wysylanie dla api aby zarejestrowal go
   }
 
-
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
 }
 // services nie jest automatycznie dodawany do app.module i trzeba go dopisac
