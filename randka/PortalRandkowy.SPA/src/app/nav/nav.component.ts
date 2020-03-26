@@ -13,7 +13,7 @@ export class NavComponent implements OnInit {
 
   model: any = {};
 
-  constructor(private authService: AuthService, private alertify: AlertifyService) { } // wstrzykniecie servisu do nawigacji
+  constructor(public authService: AuthService, private alertify: AlertifyService) { } // wstrzykniecie servisu do nawigacji
 
   ngOnInit(): void {
   }

@@ -10,6 +10,7 @@ export class AuthService {
 
   baseUrl = 'https://localhost:44340/api/auth/'; // adres bazowy dla loginu i hasla
   jwtHelper = new JwtHelperService();
+  decodedToken: any;
 
   constructor(private http: HttpClient) { } // wstrzykujemy klienta aby miec do niego dostep
 
@@ -19,6 +20,8 @@ export class AuthService {
         const user = Response;
         if (user) {
           localStorage.setItem('token', user.token);
+          this.decodedToken = this.jwtHelper.decodeToken(user.token);
+          console.log(this.decodedToken);
         }
       })); // gdy dostajemy odpowiedz z jakas odpowiedzia (response) to zapisujemy ja i jesli jest to zapisujemy token
   }
