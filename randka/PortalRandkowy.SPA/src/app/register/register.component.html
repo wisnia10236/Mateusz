@@ -1,15 +1,37 @@
-<form #registerForm="ngForm" (ngSubmit)="register"> <!-- dajemy znac ze to jest formularz angularowy i akcje ngsubmit -->
+<form #registerForm="ngForm" (ngSubmit)="(register)">
+  <!-- dajemy znac ze to jest formularz angularowy i akcje ngsubmit -->
   <h2 class="text-center text-primary">Zapisz się</h2>
   <hr />
-  <div class="form-group"> <!-- wprowadzenie nazwy uzytk- i przypisanie do modelu rejestracji -->
-    <input type="text" class="form-control" placeholder="Nazwa użytkownika" required name="username" [(ngModel)]="model.username"/>
+  <div class="form-group">
+    <!-- wprowadzenie nazwy uzytk- i przypisanie do modelu rejestracji -->
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Nazwa użytkownika"
+      required
+      name="username"
+      [(ngModel)]="model.username"
+    />
   </div>
-  <div class="form-group"> <!-- wprowadzenie hasla przypisanie do modelu rejestracji-->
-    <input type="password" class="form-control" placeholder="Hasło" required name="password" [(ngModel)]="model.password"/> 
+  <div class="form-group">
+    <!-- wprowadzenie hasla przypisanie do modelu rejestracji-->
+    <input
+      type="password"
+      class="form-control"
+      placeholder="Hasło"
+      required
+      name="password"
+      [(ngModel)]="model.password"
+    />
   </div>
 
-  <div class="form-group text-center"> <!-- przyciski do rejestracji lub anulowania-->
-    <button class="btn btn-success" type="submit" (click)="register()">Rejestracja</button>
-    <button class="btn btn-default" type="button" (click)="cancel()">Anuluj</button>
+  <div class="form-group text-center">
+    <!-- przyciski do rejestracji lub anulowania-->
+    <button class="btn btn-success" type="submit" (click)="register()">
+      Rejestracja
+    </button>
+    <button class="btn btn-default" type="button" (click)="cancel()">
+      Anuluj
+    </button>
   </div>
 </form>

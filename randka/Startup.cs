@@ -14,6 +14,7 @@ using randka.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Cors;
 
 namespace randka
 {
@@ -26,15 +27,17 @@ namespace randka
 
         public IConfiguration Configuration { get; }
 
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // dodajemy usluge dla bazy danych
-            services.AddDbContext<datacontext>(x =>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))); // < z kofiguracji appsettings pobierze baze danych odpowiadajaca nazwy
-            services.AddRazorPages();
+            services.AddDbContext<datacontext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))); // < z kofiguracji appsettings pobierze baze danych odpowiadajaca nazwy
+
             services.AddMvc(option => option.EnableEndpointRouting = false);
-            services.AddCors();     // dodanie angulara do api aby pozwalal przesylac dane
-            services.AddScoped<IAuthRepository,AuthRepository>(); // zarejestrowanie instancje dla interfejsu i repozytorium 
+            // dodanie angulara do api aby pozwalal przesylac dane
+            services.AddScoped<IAuthRepository, AuthRepository>(); // zarejestrowanie instancje dla interfejsu i repozytorium 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // dodanie tokenow i jak go kodujemy
                 .AddJwtBearer(options =>
                 {
@@ -46,6 +49,7 @@ namespace randka
                         ValidateAudience = false,
                     };
                 });
+
 
         }
 
@@ -73,11 +77,7 @@ namespace randka
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                
-            });
+
 
             app.UseMvc();
         }
